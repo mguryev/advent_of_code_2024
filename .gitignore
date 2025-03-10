@@ -1,1 +1,10 @@
-data/*
+# IDE
+.idea/
+.vscode/
+.DS_Store
+
+# Python
+.venv/
+
+# Data
+data/
