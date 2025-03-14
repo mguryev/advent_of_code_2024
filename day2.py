@@ -47,6 +47,19 @@ def is_safe_report_with_dampener(report, allowed_diffs):
     left_idx = 0
     right_idx = 1
 
+    if report[1] - report[0] in allowed_diffs:
+        left_idx = 1
+        right_idx = 2   
+    elif report[2] - report[1] in allowed_diffs:
+        left_idx = 2
+        right_idx = 3
+        exclusions += 1
+    elif report[2] - report[0] in allowed_diffs:
+        left_idx = 2
+        right_idx = 3
+        exclusions += 1
+
+
     while right_idx < len(report):
         if report[right_idx] - report[left_idx] in allowed_diffs:
             left_idx = right_idx
@@ -57,11 +70,6 @@ def is_safe_report_with_dampener(report, allowed_diffs):
 
         if exclusions > 1:
             break
-
-        if left_idx == 0 and report[right_idx + 1] - report[right_idx] in allowed_diffs:
-            left_idx += 2
-            right_idx = left_idx + 1
-            continue
 
         right_idx += 1
 
